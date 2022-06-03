@@ -1,0 +1,10 @@
+li{
+    cursor: pointer;
+}
+li:hover{
+    background-color: #f5f5f5;
+}
+li.active:hover{
+    background-color: #f5f5f5;
+    color:black
+}
