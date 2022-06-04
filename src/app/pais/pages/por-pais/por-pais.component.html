@@ -8,10 +8,10 @@
     </div>
 </div>
 <hr>
-<div class="alert alert-danger">
-    <strong>Error!</strong> No se encontró el país: ( termino ).
+<div class="alert alert-danger" *ngIf="hayError">
+    <strong>Error!</strong> No se encontró el país: {{ termino }}.
 </div>
-<div class="row">
+<div class="row" *ngIf="country.length!==0">
     <div class="col">
         <table class="table table-hover">
             <thead>
@@ -24,14 +24,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Bandera</td>
-                    <td>Nombre</td>
-                    <td>46.7 millones</td>
-                    <td>
-                        <a href="/pais/mex" class="btn btn-primary">Ver...</a>
-                    </td>
+                <tr *ngFor="let pais of country let i = index ">
+                    <td>{{ i+1 }}</td>
+                    <td><img [src]="pais.flags.svg" alt="Bandera de {{ pais.name.common }}" class="small-flag"></td>
+                    <td>{{ pais.name.common }}</td>
+                    <td>{{ pais.population | number }}</td>
+                    <td><a [routerLink]="['/pais', pais.cca2]" class="btn btn-primary">Ver mas...</a></td>
                 </tr>
             </tbody>
         </table>
