@@ -20,8 +20,9 @@ export class PorPaisComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  buscar() {
+  buscar(termino: string) {
     this.hayError = false;
+    this.termino = termino;
     this.paisService.buscarPais(this.termino).subscribe(paises => {
       this.country = paises;
       localStorage.setItem('paises', JSON.stringify(paises));

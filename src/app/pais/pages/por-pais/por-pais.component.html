@@ -2,9 +2,7 @@
 <hr>
 <div class="row">
     <div class="col">
-        <form autocomplete="off" (ngSubmit)="buscar()">
-            <input type="text" name="termino" placeholder="Buscar país..." [(ngModel)]="termino" class="form-control">
-        </form>
+        <app-pais-input (onEnter)="buscar($event)"></app-pais-input>
     </div>
 </div>
 <hr>
@@ -13,25 +11,8 @@
 </div>
 <div class="row" *ngIf="country.length!==0">
     <div class="col">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Bandera</th>
-                    <th>Nombre</th>
-                    <th>Población</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let pais of country let i = index ">
-                    <td>{{ i+1 }}</td>
-                    <td><img [src]="pais.flags.svg" alt="Bandera de {{ pais.name.common }}" class="small-flag"></td>
-                    <td>{{ pais.name.common }}</td>
-                    <td>{{ pais.population | number }}</td>
-                    <td><a [routerLink]="['/pais', pais.cca2]" class="btn btn-primary">Ver mas...</a></td>
-                </tr>
-            </tbody>
-        </table>
+
+        <app-pais-table [country]="country"></app-pais-table>
+
     </div>
 </div>
