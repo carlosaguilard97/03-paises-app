@@ -15,7 +15,7 @@ export class PorPaisComponent implements OnInit {
 
   termino: string = "";
 
-  constructor( private paisService: PaisService) { }
+  constructor(private paisService: PaisService) { }
 
   ngOnInit(): void {
   }
@@ -25,11 +25,24 @@ export class PorPaisComponent implements OnInit {
     this.termino = termino;
     this.paisService.buscarPais(this.termino).subscribe(paises => {
       this.country = paises;
-      localStorage.setItem('paises', JSON.stringify(paises));
+      // localStorage.setItem('paises', JSON.stringify(paises));
     }, error => {
       this.hayError = true;
       this.country = [];
     });
-    this.termino = "";
+    // this.termino = "";
+  }
+
+  sugerencias(termino: string) {
+    this.hayError = false; 
+    console.log(termino);
+    // this.termino = termino;
+    // this.paisService.buscarPais(this.termino).subscribe(paises => {
+    //   this.country = paises;
+    //   // localStorage.setItem('paises', JSON.stringify(paises));
+    // }, error => {
+    //   this.hayError = true;
+    //   this.country = [];
+    // });
   }
 }

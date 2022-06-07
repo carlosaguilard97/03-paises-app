@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
+import { debounceTime, Subject } from 'rxjs';
 import { RESTCountryResponse } from '../../interfaces/pais.interface';
-import { PaisService } from '../../services/pais.service';
 
 @Component({
   selector: 'app-pais-input',
@@ -11,16 +11,28 @@ export class PaisInputComponent implements OnInit {
 
   termino: string = "";
 
-  @Output() onEnter: EventEmitter<string> = new EventEmitter<string>();
+  @Input() placeholder: string = "Buscar...";
 
-  constructor(private paisService: PaisService) { }
+  @Output() onEnter: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onDebounce: EventEmitter<string> = new EventEmitter<string>();
+
+  debounce: Subject<string> = new Subject<string>();
+
+  constructor() { }
 
   ngOnInit(): void {
+    this.debounce.pipe(
+      debounceTime(500)
+    ).subscribe(termino => this.onDebounce.emit(termino));
   }
 
   buscar() {
     this.onEnter.emit(this.termino);
-    // this.termino = "";
+    this.termino = "";
+  }
+
+  teclaPresionada() {
+    this.debounce.next(this.termino);
   }
 
 }
