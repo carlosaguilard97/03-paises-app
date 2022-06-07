@@ -35,7 +35,7 @@ export class PorPaisComponent implements OnInit {
 
   sugerencias(termino: string) {
     this.hayError = false; 
-    console.log(termino);
+    // console.log(termino);
     // this.termino = termino;
     // this.paisService.buscarPais(this.termino).subscribe(paises => {
     //   this.country = paises;
